@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: Computational redesign of murine IL-12 p35 loop as a protease-resistant alpha helix
+message: If you use this repository, please cite the associated manuscript when available.
+type: software
+authors:
+  - family-names: Su
+    given-names: Yeyu
+license: MIT
+repository-code: https://github.com/YeyuSu/mil12-computational-design
+identifiers: []
+keywords:
+  - IL-12
+  - RFdiffusion
+  - ProteinMPNN
+  - AlphaFold 3
+  - protein design
+# Add the manuscript DOI here after publication.
+# doi: 10.xxxx/xxxxx

@@ -1,0 +1,11 @@
+name: mil12-computational-design
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.9
+  - pip
+  - pip:
+      - pandas>=1.5
+# RFdiffusion, ProteinMPNN, and AlphaFold 3 are not installed from this file.
+# See helix_rebuild/01_rfdiffusion/README.md, helix_rebuild/02_proteinmpnn/README.md,
+# and helix_rebuild/03_alphafold3/README.md for official installation links.

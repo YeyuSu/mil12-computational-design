@@ -1,0 +1,8 @@
+design_id,campaign,experimental_label,computational_id,af3_folder,aa_count,no_R_or_K,avg_plddt,avg_iptm,rank_by_helix_plddt,notes
+helix_26_7,helix_rebuild,1,mil12_alphahelix_14-25aa_26_7,helix_rebuild/03_alphafold3/selected/26_7,21,false,90.06,0.852,1,RFdiffusion+ProteinMPNN+AF3; experimental construct 1
+helix_47_2,helix_rebuild,5,mil12_alphahelix_14-25aa_47_2,helix_rebuild/03_alphafold3/selected/47_2,20,false,89.28,0.860,4,RFdiffusion+ProteinMPNN+AF3; experimental construct 5
+helix_38_10,helix_rebuild,11,mil12_alphahelix_14-25aa_38_10,helix_rebuild/03_alphafold3/selected/38_10,19,false,88.35,0.846,10,RFdiffusion+ProteinMPNN+AF3; experimental construct 11
+helix_20_2,helix_rebuild,noRK1,mil12_alphahelix_14-25aa_20_2,helix_rebuild/03_alphafold3/selected/20_2_noRK,14,true,78.72,0.860,158,RFdiffusion+ProteinMPNN+AF3; no R/K in helix; experimental construct noRK1
+helix_5_8,helix_rebuild,noRK2,mil12_alphahelix_14-25aa_5_8,helix_rebuild/03_alphafold3/selected/5_8_noRK,15,true,74.80,0.850,214,RFdiffusion+ProteinMPNN+AF3; no R/K in helix; experimental construct noRK2
+loop_0_3_sample358,loop_redesign,6,mIL12_redesignloop_0_3_sample358,loop_redesign/selected/0_3_sample358,14,true,77.16,0.848,,ProteinMPNN only on WT p35 147-160 (T=0.3); experimental construct 6; AF3 JSON included (coordinates were not archived)
+loop_wt,loop_redesign,WT,mil12_wt,loop_redesign/selected/wt,14,false,,0.840,,wild-type p35 loop 147-160 (reference; not a designed mutant)

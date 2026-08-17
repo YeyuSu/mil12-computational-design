@@ -1,0 +1,23 @@
+.DS_Store
+# Designed amino-acid sequences are not redistributed
+*.fa
+*.fasta
+helix_rebuild/02_proteinmpnn/seqs/
+helix_rebuild/02_proteinmpnn/seqs_renamed/
+helix_rebuild/03_alphafold3/json_inputs/
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+*.xlsx
+*.pse
+*.dna
+*.prc
+*.pptx
+*.pzfx
+.ipynb_checkpoints/
+.idea/
+.vscode/
+*.code-workspace
