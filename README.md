@@ -58,12 +58,70 @@ Construct 6 keeps the wild-type p35 backbone and only redesigns residues 147–1
 
 Score table (no sequences): [designs/selected_designs.csv](designs/selected_designs.csv).
 
-## Reproduce the analysis scripts
+## System requirements and installation
+
+The CPU preprocessing demo below uses only the Python standard library and was
+tested with Python 3.9.6 on macOS 15.7.9. Other analysis scripts use modern
+type annotations and need Python 3.10 or newer; use Python 3.12 for the local
+analysis environment. `environment.yml` also installs pandas for local table
+work. The complete design campaign has **not** been tested in this repository on a
+standard desktop computer, and exact versions of the three historical model
+installations were not archived.
+
+Install the local analysis environment with Conda:
 
 ```bash
 conda env create -f environment.yml
 conda activate mil12-computational-design
+```
 
+`environment.yml` does **not** install RFdiffusion, ProteinMPNN, AlphaFold 3,
+their model weights, or their CUDA dependencies. Install each separately using
+its official instructions, in a compatible GPU environment:
+
+- [RFdiffusion](https://github.com/RosettaCommons/RFdiffusion)
+- [ProteinMPNN](https://github.com/dauparas/ProteinMPNN)
+- [AlphaFold 3](https://github.com/google-deepmind/alphafold3)
+
+The full backbone generation, sequence design, and local AlphaFold 3 prediction
+workflow requires an NVIDIA GPU and software compatible with the respective
+upstream model releases. GPU memory and runtime depend on the chosen model and
+job size; this repository does not establish a tested minimum. AlphaFold Server
+is an alternative submission route for prediction, subject to its own access
+and terms. **Typical installation time and full-design runtime on a standard
+desktop computer: Not applicable to a standard desktop computer; GPU required.**
+No measured GPU installation or campaign time is available from the archived
+run, so no numerical estimate is given.
+
+## CPU demo with included data
+
+From the repository root, the following step checks all 50 included
+RFdiffusion PDB backbones and identifies the positions to be redesigned. It
+does not require a GPU, model installation, or designed sequences:
+
+```bash
+python helix_rebuild/02_proteinmpnn/process_diffusion_pdbs.py \
+  --pdb-dir helix_rebuild/01_rfdiffusion/outputs \
+  --outdir /tmp/mil12-cpu-demo
+```
+
+Expected final line: `Wrote dictionaries for 50/50 PDBs to
+/tmp/mil12-cpu-demo`. The output directory contains `assigned_chains.jsonl`
+and `fixed_positions.jsonl`. On macOS 15.7.9 with Python 3.9.6, this command
+took 0.08 seconds of wall time in one local run (`/usr/bin/time -p`); this is
+an observed value, not a general desktop benchmark. The Conda installation
+time was not measured.
+
+## Full design workflow and local scripts
+
+Run the model stages in the order described in [docs/pipeline.md](docs/pipeline.md).
+Example production commands are in
+`helix_rebuild/01_rfdiffusion/run_rfdiffusion.sh`,
+`helix_rebuild/02_proteinmpnn/run_proteinmpnn.sh`, and
+`loop_redesign/run_proteinmpnn.sh`. After ProteinMPNN creates a FASTA locally,
+build the helix AlphaFold 3 JSON inputs with:
+
+```bash
 # After running ProteinMPNN locally, build AF3 JSON from FASTA
 python helix_rebuild/03_alphafold3/generate_af3_json.py \
   --fasta /path/to/seqs_renamed \
@@ -71,14 +129,13 @@ python helix_rebuild/03_alphafold3/generate_af3_json.py \
   --outdir /tmp/helix_json
 ```
 
-RFdiffusion / ProteinMPNN / AlphaFold 3 themselves need GPU installations:
-
-- [RFdiffusion](https://github.com/RosettaCommons/RFdiffusion)
-- [ProteinMPNN](https://github.com/dauparas/ProteinMPNN)
-- [AlphaFold 3](https://github.com/google-deepmind/alphafold3)
-
-Example commands: `helix_rebuild/01_rfdiffusion/run_rfdiffusion.sh` and
-`helix_rebuild/02_proteinmpnn/run_proteinmpnn.sh`.
+The FASTA and designed AF3 inputs are intentionally absent from this public
+repository. Thus, the JSON-generation command cannot run directly from the
+checkout, and the historical AF3 scores cannot be fully regenerated from the
+archived files alone. To run the workflow on another protein, supply your own
+starting structure, adapt the hard-coded p35/p40 chain IDs and residue windows
+in the scripts, and regenerate sequences and AF3 inputs; the published
+parameters are specific to murine IL-12.
 
 ## Data notes
 
