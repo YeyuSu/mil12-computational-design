@@ -108,7 +108,7 @@ python helix_rebuild/02_proteinmpnn/process_diffusion_pdbs.py \
 Expected final line: `Wrote dictionaries for 50/50 PDBs to
 /tmp/mil12-cpu-demo`. The output directory contains `assigned_chains.jsonl`
 and `fixed_positions.jsonl`. On macOS 15.7.9 with Python 3.9.6, this command
-took 0.07 seconds of wall time in one local run (`/usr/bin/time -p`); this is
+took 0.08 seconds of wall time in one local run (`/usr/bin/time -p`); this is
 an observed value, not a general desktop benchmark. The Conda installation
 time was not measured.
 
